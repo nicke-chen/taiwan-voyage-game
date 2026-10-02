@@ -14,3 +14,5 @@ https://nicke-chen.github.io/taiwan-voyage-game/
 6. 等待 GitHub Pages 完成發布
 
 發布後，學生可直接開啟上方網址，或掃描 QR Code 進入遊戲。
+
+Deployment trigger
