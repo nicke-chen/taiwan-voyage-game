@@ -3,45 +3,78 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>大航海時代：臺灣任務</title>
+<title>大航海時代：臺灣任務｜16關完整版</title>
 <style>
-:root{--bg:#eef9ff;--card:#fff;--ink:#18324a;--muted:#627a8e;--line:#cfe6f4}
+:root{--ink:#18324a;--muted:#64798a;--line:#cfe6f4;--blue:#2477c9;--green:#3c9d62;--gold:#f5b63c;--red:#db5a4f;--panel:#fff;--soft:#f5fbff}
 *{box-sizing:border-box}body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:linear-gradient(#e8f8ff,#fff7e6);color:var(--ink)}
-.wrap{max-width:980px;margin:auto;padding:18px}.hero,.card{background:#fff;border:2px solid var(--line);border-radius:24px;padding:20px;margin-bottom:16px}
-.title{font-size:clamp(28px,6vw,48px);font-weight:900;margin:0}.sub{color:var(--muted);line-height:1.7}
-.toprow{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
-.score{background:#fff7d6;border:2px solid #ffd66b;border-radius:18px;padding:12px 18px;text-align:center;min-width:130px}.score b{font-size:30px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}@media(max-width:720px){.grid{grid-template-columns:1fr}.wrap{padding:10px}}
-h2{margin:0 0 8px;font-size:24px}.q{font-weight:700;line-height:1.7}.choices{display:grid;gap:9px}
-button{font:inherit}.choice,.timeline,.reset{min-height:48px;border:2px solid var(--line);border-radius:14px;background:#fff;padding:11px 14px;cursor:pointer;color:var(--ink);font-weight:700;text-align:left}
-.choice.ok,.timeline.ok{background:#e9f8eb;border-color:#5abb66}.choice.bad{background:#fff0ef;border-color:#ef7770}button:disabled{cursor:default;opacity:.9}
-.feedback{min-height:28px;margin:10px 0 0;font-weight:700}.timeline-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}@media(max-width:720px){.timeline-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.track{margin-top:12px;padding:12px;background:#f5fbff;border-radius:14px;border:1px dashed #99cdea;min-height:52px;font-weight:800;line-height:1.8}
-.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.badge{padding:8px 11px;border-radius:999px;background:#f2f5f8;border:1px solid var(--line);font-weight:800}
-.memory{background:linear-gradient(135deg,#fff6dc,#f2fbff);text-align:center}.memory strong{font-size:clamp(22px,5vw,34px)}
-.reset{background:#1e88e5;color:#fff;border-color:#1e88e5;text-align:center}.small{font-size:14px;color:var(--muted)}footer{text-align:center;color:var(--muted);padding:12px}
-</style></head>
-<body><main class="wrap" id="app">
-<section class="hero"><div class="toprow"><div><div style="font-size:34px">⛵ 🧭 🗺️</div><h1 class="title">大航海時代：臺灣任務</h1><p class="sub">五年級社會｜圖像記憶互動挑戰<br>完成 4 關，把「航運要道、人物、時間與事件」串成一張記憶地圖。</p></div><div class="score"><div class="small">目前得分</div><b id="score">0 / 4</b></div></div></section>
-
-<section class="grid">
-<article class="card"><h2>🧭 第 1 關｜臺灣為什麼重要？</h2><p class="q">16 世紀，歐洲國家透過新航路來到亞洲。請選出最關鍵的地理原因。</p><div class="choices" data-q="q1"><button class="choice" data-correct="true">🌏 臺灣位在航運要道</button><button class="choice" data-correct="false">🏔️ 臺灣山很多</button><button class="choice" data-correct="false">❄️ 臺灣冬天很冷</button></div><p class="feedback"></p></article>
-<article class="card"><h2>🌾 第 2 關｜誰在臺灣活動？</h2><p class="q">哪一組人物曾招募漢人來臺，並在今日雲林、嘉義一帶開墾？</p><div class="choices" data-q="q2"><button class="choice" data-correct="false">🎣 漁民</button><button class="choice" data-correct="true">🌾 顏思齊、鄭芝龍</button><button class="choice" data-correct="false">🏯 施琅、陳永華</button></div><p class="feedback"></p></article>
+.wrap{max-width:1000px;margin:auto;padding:16px}.card{background:#fff;border:2px solid var(--line);border-radius:24px;padding:20px;margin-bottom:16px}.hero{background:linear-gradient(135deg,#fff,#f3fbff)}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}.title{font-size:clamp(28px,6vw,48px);font-weight:900;margin:0}.sub{color:var(--muted);line-height:1.7;margin:.5rem 0 0}.scorebox{display:grid;grid-template-columns:repeat(3,minmax(92px,1fr));gap:8px;min-width:min(100%,340px)}.stat{background:#fff8dc;border:1px solid #f0d777;border-radius:14px;padding:10px;text-align:center}.stat b{font-size:24px}.small{font-size:13px;color:var(--muted)}
+.progress{height:14px;background:#e8eff4;border-radius:999px;overflow:hidden;margin-top:14px}.bar{height:100%;width:0;background:linear-gradient(90deg,#45a3e5,#48b77a);transition:.25s}.chapter{font-size:14px;font-weight:800;color:var(--blue);margin-bottom:6px}.qtitle{font-size:clamp(22px,4vw,30px);font-weight:900;margin:0}.qtext{font-size:19px;font-weight:750;line-height:1.7;margin:14px 0}.visual{min-height:130px;border:2px dashed #b8dced;border-radius:18px;background:#f7fcff;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;margin:12px 0;color:#547086}.visual .emoji{font-size:54px;display:block;margin-bottom:6px}.visual img{max-width:100%;max-height:260px;border-radius:14px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}@media(max-width:720px){.choices{grid-template-columns:1fr}.wrap{padding:9px}.card{border-radius:18px;padding:15px}.scorebox{grid-template-columns:repeat(3,1fr);width:100%}}
+.choice{border:2px solid var(--line);border-radius:14px;background:#fff;min-height:56px;padding:12px 14px;text-align:left;font:inherit;font-weight:800;color:var(--ink);cursor:pointer}.choice:hover{border-color:#79bce6}.choice.correct{background:#e9f8ee;border-color:#52ad70}.choice.wrong{background:#fff0ee;border-color:#e4796e}.choice:disabled{cursor:default;opacity:.95}.feedback{min-height:34px;font-weight:800;line-height:1.6;margin:12px 0 0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.btn{border:0;border-radius:14px;padding:12px 18px;font:inherit;font-weight:900;cursor:pointer}.primary{background:var(--blue);color:#fff}.secondary{background:#edf4f8;color:var(--ink)}.hintbox{display:none;background:#fff8dc;border:1px solid #efd878;border-radius:14px;padding:12px;margin-top:10px;font-weight:700}.hintbox.show{display:block}.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.orderBtn{min-height:90px;border:2px solid var(--line);border-radius:14px;background:#fff;padding:10px;font:inherit;font-weight:850;cursor:pointer}.orderBtn.selected{background:#e9f8ee;border-color:#52ad70}.track{background:#f5fbff;border:1px dashed #9bcfe9;border-radius:14px;padding:12px;margin-top:12px;min-height:54px;font-weight:900;line-height:1.7}@media(max-width:720px){.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.result{display:none}.result.show{display:block}.grade{font-size:clamp(28px,6vw,48px);font-weight:900}.review{display:grid;gap:8px}.reviewitem{padding:10px 12px;border-radius:12px;background:#f7fafc;border:1px solid var(--line)}.certificate{margin-top:14px;padding:18px;border:4px double #d8b458;border-radius:18px;background:#fffdf3;text-align:center}.namegrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-top:14px}.namegrid input{width:100%;padding:12px;border:1px solid #bcd3e2;border-radius:12px;font:inherit}@media(max-width:650px){.namegrid{grid-template-columns:1fr}}
+.badges{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}.badge{background:#eef6fb;border:1px solid #bdd9e9;padding:7px 10px;border-radius:999px;font-weight:850}.hidden{display:none!important}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="card hero" id="intro">
+  <div class="top"><div><div style="font-size:36px">⛵ 🧭 🗺️</div><h1 class="title">大航海時代：臺灣任務</h1><p class="sub">五年級社會｜16 關圖像記憶完整版<br>從新航路一路闖到「荷西鄭清」，完成後查看分數、第一次答對率與錯題回顧。</p></div><div class="scorebox"><div class="stat"><span class="small">關卡</span><br><b id="stageStat">1/16</b></div><div class="stat"><span class="small">分數</span><br><b id="scoreStat">0</b></div><div class="stat"><span class="small">首次答對</span><br><b id="firstStat">0</b></div></div></div>
+  <div class="namegrid"><input id="studentName" placeholder="姓名"><input id="studentClass" placeholder="班級"><input id="studentNo" placeholder="座號"></div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
 </section>
 
-<section class="card"><h2>⌛ 第 3 關｜時間軸排一排</h2><p class="q">依照先後順序點選四個勢力。</p><div class="timeline-grid"><button class="timeline" data-year="1662">⚔️ 鄭成功來臺<br><span class="small">1662</span></button><button class="timeline" data-year="1624">🏰 荷蘭人來臺<br><span class="small">1624</span></button><button class="timeline" data-year="1684">🚩 清帝國統治臺灣<br><span class="small">1684</span></button><button class="timeline" data-year="1626">🏯 西班牙人來臺<br><span class="small">1626</span></button></div><div class="track" id="timelineResult">尚未開始</div><p class="feedback" id="timelineFeedback"></p></section>
+<section class="card" id="game">
+  <div class="chapter" id="chapter"></div>
+  <h2 class="qtitle" id="qtitle"></h2>
+  <div class="visual" id="visual"></div>
+  <div class="qtext" id="qtext"></div>
+  <div class="choices" id="choices"></div>
+  <div class="timeline hidden" id="timeline"></div>
+  <div class="track hidden" id="track"></div>
+  <div class="feedback" id="feedback" aria-live="polite"></div>
+  <div class="hintbox" id="hintbox"></div>
+  <div class="actions"><button class="btn secondary" id="hintBtn">💡 使用提示</button><button class="btn primary hidden" id="nextBtn">下一關 →</button></div>
+</section>
 
-<section class="card"><h2>🏆 第 4 關｜事件配對</h2><p class="q">「在臺南設立承天府，建立第一個在臺的漢人政權」和誰有關？</p><div class="choices" data-q="q4"><button class="choice" data-correct="false">🇳🇱 荷蘭人</button><button class="choice" data-correct="false">🇪🇸 西班牙人</button><button class="choice" data-correct="true">⚔️ 鄭成功</button><button class="choice" data-correct="false">🚩 施琅</button></div><p class="feedback"></p></section>
-
-<section class="card memory"><div>🧠 <b>記憶口訣</b></div><p><strong>航運要道最重要，荷西鄭清依序到。</strong></p><div class="badges"><span class="badge">荷 1624</span><span class="badge">西 1626</span><span class="badge">鄭 1662</span><span class="badge">清 1684</span></div><p id="finalMessage" style="font-weight:900;font-size:20px"></p><button class="reset" id="resetBtn">重新挑戰</button></section>
-<footer>適合手機、平板與電腦使用｜GitHub Pages 版本</footer></main>
+<section class="card result" id="result">
+  <div class="grade" id="grade"></div>
+  <p id="summary"></p>
+  <div class="badges" id="resultBadges"></div>
+  <div class="certificate"><div style="font-size:38px">🏆</div><h2>大航海時代航海家證書</h2><p id="certName"></p><p>完成「臺灣為什麼在大航海時代崛起？」16 關任務</p><p><b id="certScore"></b></p></div>
+  <h3>錯題回顧</h3><div class="review" id="review"></div>
+  <div class="actions"><button class="btn primary" id="restartBtn">重新挑戰</button></div>
+</section>
+</main>
 <script>
-(() => {
-const done=new Set(),score=document.getElementById('score'),final=document.getElementById('finalMessage');
-const update=()=>{score.textContent=done.size+' / 4';final.textContent=done.size===4?'🎉 任務完成！你已經把大航海時代臺灣的重要脈絡串起來了！':''};
-document.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{const g=btn.closest('[data-q]');if(g.dataset.locked==='1')return;const f=g.parentElement.querySelector('.feedback');if(btn.dataset.correct==='true'){btn.classList.add('ok');f.textContent='✅ 答對了！把圖像和關鍵詞一起記住。';g.dataset.locked='1';g.querySelectorAll('button').forEach(b=>b.disabled=true);done.add(g.dataset.q)}else{btn.classList.add('bad');f.textContent='↩️ 再想一下，找出和課堂架構圖最吻合的關鍵詞。';setTimeout(()=>btn.classList.remove('bad'),650)}update()}));
-const order=['1624','1626','1662','1684'],labels={'1624':'荷蘭','1626':'西班牙','1662':'鄭成功','1684':'清帝國'},picked=[],result=document.getElementById('timelineResult'),tf=document.getElementById('timelineFeedback');
-document.querySelectorAll('.timeline').forEach(btn=>btn.addEventListener('click',()=>{if(btn.disabled||picked.length>=4)return;const y=btn.dataset.year;if(y===order[picked.length]){picked.push(y);btn.disabled=true;btn.classList.add('ok');result.textContent=picked.map(v=>v+' '+labels[v]).join(' → ');tf.textContent=picked.length===4?'✅ 完成！1624 → 1626 → 1662 → 1684。':'✅ 正確，繼續下一個。';if(picked.length===4)done.add('q3')}else{tf.textContent='❌ 這個年份還沒輪到，再找更早的事件。'}update()}));
-document.getElementById('resetBtn').addEventListener('click',()=>{done.clear();picked.splice(0,picked.length);document.querySelectorAll('[data-q]').forEach(g=>g.dataset.locked='0');document.querySelectorAll('button.choice,button.timeline').forEach(b=>{b.disabled=false;b.classList.remove('ok','bad')});document.querySelectorAll('.feedback').forEach(x=>x.textContent='');result.textContent='尚未開始';tf.textContent='';final.textContent='';update();window.scrollTo({top:0,behavior:'smooth'})});update();
-})();
-</script></body></html>
+const questions=[
+{chapter:'單元 A｜大航海時代與臺灣的重要性',title:'第 1 關｜新航路來了',text:'西元 16 世紀，歐洲國家主要透過什麼方式來到亞洲？',visual:'⛵🌍<br>歐洲帆船跨海航行',options:['新航路','高速鐵路','空中航線','陸上公路'],answer:0,hint:'想一想：大航海時代最重要的交通工具是船。',correct:'16 世紀歐洲國家透過新航路來到亞洲。'},
+{chapter:'單元 A｜大航海時代與臺灣的重要性',title:'第 2 關｜歐洲人想找什麼？',text:'歐洲國家來到亞洲，主要想尋找哪些商品？',visual:'🏺 🧵 🌶️<br>瓷器・絲綢・香料',options:['瓷器、絲綢、香料','牛奶、麵包、起司','石油、煤炭、天然氣','電腦、手機、晶片'],answer:0,hint:'看看青花瓷、布匹與香料這三種圖像。',correct:'瓷器、絲綢和香料都是當時重要的亞洲商品。'},
+{chapter:'單元 A｜大航海時代與臺灣的重要性',title:'第 3 關｜臺灣為什麼重要？',text:'臺灣在大航海時代受到各方重視，最重要的原因是什麼？',visual:'🚢 ➜ 🗺️臺灣 ⇦ 🚢<br>船隻往來東亞海域',options:['位在航運要道','山很多','冬天很冷','人口最多'],answer:0,hint:'想想船隻往來亞洲時，臺灣的位置有什麼優勢？',correct:'臺灣位在航運要道，使海上貿易交流更加頻繁。'},
+{chapter:'單元 A｜大航海時代與臺灣的重要性',title:'第 4 關｜臺灣登上國際舞台',text:'因為臺灣位在航運要道，帶來哪一項結果？',visual:'🌏 🤝 ⛵<br>各族群與商船來往',options:['吸引各族群來臺建立據點','海上交通完全停止','沒有人願意來臺灣','臺灣與其他地區失去聯繫'],answer:0,hint:'航運越方便，往來的人通常會變多還是變少？',correct:'臺灣吸引不同族群來此活動與建立據點，逐漸登上國際舞台。'},
+{chapter:'單元 B｜當時有哪些人來到臺灣？',title:'第 5 關｜誰原本就在臺灣？',text:'在大航海時代之前，原本就生活在臺灣的是誰？',visual:'🌿 👥 🏝️<br>原本生活在臺灣的住民',options:['原住民','荷蘭人','西班牙人','清帝國官員'],answer:0,hint:'找出不是後來從海外來臺的族群。',correct:'原住民原本就生活在臺灣。'},
+{chapter:'單元 B｜當時有哪些人來到臺灣？',title:'第 6 關｜漁民和原住民',text:'漁民到臺灣活動時，會和原住民做什麼？',visual:'🎣 🐟 ⇄ 🏺<br>沿海交換物品',options:['交換物品','建造城堡','設立承天府','派兵進攻'],answer:0,hint:'想想漁民帶著魚貨來到沿海，最可能進行什麼活動？',correct:'漁民會和原住民交換物品。'},
+{chapter:'單元 B｜當時有哪些人來到臺灣？',title:'第 7 關｜海商與海盜',text:'中國、日本的海商與海盜，常把臺灣當作什麼？',visual:'⛵ 📦 ⚓<br>海上交易與停靠',options:['貿易據點','首都','皇宮','軍事學校'],answer:0,hint:'這些人主要從事海上活動與交易。',correct:'中國、日本的海商與海盜曾以臺灣作為貿易據點。'},
+{chapter:'單元 B｜當時有哪些人來到臺灣？',title:'第 8 關｜顏思齊、鄭芝龍',text:'顏思齊、鄭芝龍曾進行哪一項活動？',visual:'👥 🌾 🏠<br>招募漢人來臺開墾',options:['招募漢人來臺開墾','建立熱蘭遮城','攻打鄭氏政權','把臺灣納入清帝國版圖'],answer:0,hint:'想想「顏思齊、鄭芝龍」和農田、開墾有什麼關係。',correct:'他們曾招募漢人來臺，在今日雲林、嘉義一帶開墾。'},
+{chapter:'單元 C｜四大勢力依序來臺',title:'第 9 關｜1624 荷蘭人來臺',text:'荷蘭人在西元 1624 年來臺後，以哪裡作為根據地？',visual:'🇳🇱 🏰 📍臺南',options:['臺南','基隆','淡水','花蓮'],answer:0,hint:'荷蘭人的主要據點在臺灣南部。',correct:'荷蘭人以臺南為根據地。'},
+{chapter:'單元 C｜四大勢力依序來臺',title:'第 10 關｜荷蘭人的建設與貿易',text:'下列哪一項是荷蘭人在臺灣進行的活動？',visual:'🏰 🌾 🚢<br>建設・開墾・貿易',options:['建立熱蘭遮城、普羅民遮城','招募漢人開墾農田','與其他國家進行貿易','以上皆是'],answer:3,hint:'荷蘭人在臺的活動不只一種，要把「建設、開墾、貿易」一起記。',correct:'荷蘭人在臺灣進行建設、開墾與貿易。'},
+{chapter:'單元 C｜四大勢力依序來臺',title:'第 11 關｜1626 西班牙人來臺',text:'西班牙人在西元 1626 年進入臺灣後，主要活動在哪一區？',visual:'🇪🇸 🗺️⬆️<br>臺灣北部',options:['北部','南部','東部','中部'],answer:0,hint:'記憶口訣可以想：「西班牙—北部」。',correct:'西班牙人進入臺灣北部。'},
+{chapter:'單元 C｜四大勢力依序來臺',title:'第 12 關｜基隆與淡水',text:'西班牙人曾在哪兩個地方建立城堡，作為統治中心和貿易據點？',visual:'🏰 基隆 ＋ 🏰 淡水',options:['基隆、淡水','臺南、高雄','嘉義、雲林','花蓮、臺東'],answer:0,hint:'這兩個地方都位在臺灣北部。',correct:'西班牙人在基隆、淡水建立城堡與貿易據點。'},
+{chapter:'單元 D｜鄭氏政權與清帝國',title:'第 13 關｜1662 鄭成功來臺',text:'鄭成功在西元 1662 年來臺後，首先迫使哪一個勢力退出臺灣？',visual:'⚔️ 鄭成功 ➜ 🇳🇱',options:['荷蘭人','西班牙人','清帝國','日本海商'],answer:0,hint:'想想 1624 年來臺、在臺南建立據點的是誰。',correct:'鄭成功攻打荷蘭人，迫使荷蘭人退出臺灣。'},
+{chapter:'單元 D｜鄭氏政權與清帝國',title:'第 14 關｜承天府',text:'鄭成功來臺後，在臺南設立哪一個行政中心？',visual:'🏯 承天府',options:['承天府','熱蘭遮城','普羅民遮城','淡水城'],answer:0,hint:'這個名稱裡有一個「天」字。',correct:'鄭成功在臺南設立承天府，建立第一個在臺的漢人政權。'},
+{chapter:'單元 D｜鄭氏政權與清帝國',title:'第 15 關｜1684 臺灣納入清帝國',text:'鄭經過世後，鄭氏政權內部紛爭不斷，清帝國派誰帶兵進攻臺灣？',visual:'🚩 清 ＋ ⚔️ 施琅',options:['施琅','鄭成功','顏思齊','鄭芝龍'],answer:0,hint:'找出屬於清帝國一方的人物。',correct:'清帝國派施琅帶兵進攻臺灣。'},
+{chapter:'最終挑戰｜時間軸 Boss',title:'第 16 關｜荷西鄭清大排序',type:'order',text:'請依照時間先後，把四個事件排出正確順序。',visual:'⏳ 1624 → 1626 → 1662 → 1684',items:[['荷蘭人來臺','1624'],['西班牙人來臺','1626'],['鄭成功來臺','1662'],['清帝國統治臺灣','1684']],order:['1624','1626','1662','1684'],hint:'記憶口訣：「航運要道最重要，荷西鄭清依序到。」',correct:'正確順序：荷蘭人 → 西班牙人 → 鄭成功 → 清帝國。'}
+];
+let index=0,score=0,firstCorrect=0,attempts=0,hintUsed=false,answered=false,wrongQuestions=[],orderPicked=[];
+const $=id=>document.getElementById(id),chapter=$('chapter'),qtitle=$('qtitle'),qtext=$('qtext'),visual=$('visual'),choices=$('choices'),timeline=$('timeline'),track=$('track'),feedback=$('feedback'),hintbox=$('hintbox'),hintBtn=$('hintBtn'),nextBtn=$('nextBtn'),bar=$('bar');
+function render(){const q=questions[index];answered=false;attempts=0;hintUsed=false;orderPicked=[];chapter.textContent=q.chapter;qtitle.textContent=q.title;qtext.textContent=q.text;visual.innerHTML='<div><span class="emoji">'+q.visual.split('<br>')[0]+'</span>'+(q.visual.split('<br>')[1]||'')+'</div>';feedback.textContent='';hintbox.classList.remove('show');hintbox.textContent=q.hint;nextBtn.classList.add('hidden');choices.innerHTML='';timeline.innerHTML='';timeline.classList.add('hidden');track.classList.add('hidden');track.textContent='尚未開始';hintBtn.disabled=false;$('stageStat').textContent=(index+1)+'/16';$('scoreStat').textContent=score;$('firstStat').textContent=firstCorrect;bar.style.width=((index)/16*100)+'%';if(q.type==='order'){timeline.classList.remove('hidden');track.classList.remove('hidden');[...q.items].sort(()=>Math.random()-.5).forEach(item=>{const b=document.createElement('button');b.className='orderBtn';b.innerHTML=item[0]+'<br><span class="small">'+item[1]+'</span>';b.dataset.year=item[1];b.addEventListener('click',()=>pickOrder(b,q));timeline.appendChild(b);});}else{q.options.forEach((opt,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=String.fromCharCode(65+i)+'. '+opt;b.addEventListener('click',()=>choose(b,i,q));choices.appendChild(b);});}}
+function award(q,isFirst){if(isFirst&&!hintUsed){score+=5;firstCorrect++;}else if(!hintUsed){score+=3;}else{score+=2;}$('scoreStat').textContent=score;$('firstStat').textContent=firstCorrect;feedback.textContent='✅ '+q.correct;nextBtn.classList.remove('hidden');hintBtn.disabled=true;answered=true;}
+function choose(btn,i,q){if(answered)return;attempts++;if(i===q.answer){btn.classList.add('correct');choices.querySelectorAll('button').forEach(b=>b.disabled=true);award(q,attempts===1);}else{btn.classList.add('wrong');feedback.textContent='❌ 再想一下。你可以再試一次，或使用提示。';if(!wrongQuestions.includes(index))wrongQuestions.push(index);setTimeout(()=>btn.classList.remove('wrong'),550);}}
+function pickOrder(btn,q){if(answered||btn.disabled)return;attempts++;const expected=q.order[orderPicked.length];if(btn.dataset.year===expected){orderPicked.push(btn.dataset.year);btn.disabled=true;btn.classList.add('selected');track.textContent=orderPicked.join(' → ');if(orderPicked.length===4){timeline.querySelectorAll('button').forEach(b=>b.disabled=true);award(q,attempts===4);}}else{feedback.textContent='❌ 這個事件還沒輪到，再找更早的年份。';if(!wrongQuestions.includes(index))wrongQuestions.push(index);}}
+hintBtn.addEventListener('click',()=>{hintUsed=true;hintbox.classList.add('show');hintBtn.disabled=true;});
+nextBtn.addEventListener('click',()=>{if(index<15){index++;render();}else finish();});
+function finish(){bar.style.width='100%';$('game').classList.add('hidden');$('result').classList.add('show');const pct=Math.round(score/80*100);let label=pct>=90?'🌟 航海王':pct>=75?'⛵ 航海高手':pct>=60?'🧭 航海小尖兵':'🔁 再挑戰一次';$('grade').textContent=label;$('summary').textContent='總分 '+score+' / 80｜第一次答對 '+firstCorrect+' / 16｜錯題 '+wrongQuestions.length+' 題';$('resultBadges').innerHTML='<span class="badge">荷 1624</span><span class="badge">西 1626</span><span class="badge">鄭 1662</span><span class="badge">清 1684</span>';$('certName').textContent=($('studentName').value||'同學')+'｜'+($('studentClass').value||'班級未填')+' '+($('studentNo').value||'')+'號';$('certScore').textContent='成績：'+score+' / 80';const review=$('review');review.innerHTML='';if(wrongQuestions.length===0){review.innerHTML='<div class="reviewitem">🎉 全部一次掌握，沒有錯題！</div>';}else wrongQuestions.forEach(i=>{const q=questions[i],div=document.createElement('div');div.className='reviewitem';div.innerHTML='<b>'+q.title+'</b><br>'+q.correct;review.appendChild(div);});}
+$('restartBtn').addEventListener('click',()=>{index=0;score=0;firstCorrect=0;wrongQuestions=[];$('result').classList.remove('show');$('game').classList.remove('hidden');render();window.scrollTo({top:0,behavior:'smooth'});});
+render();
+</script>
+</body>
+</html>
