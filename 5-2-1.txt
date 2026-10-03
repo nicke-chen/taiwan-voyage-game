@@ -1,0 +1,14 @@
+images/
+├─ cover/
+│  └─ hero.png
+├─ scenes/
+│  ├─ world-routes.png
+│  ├─ trade-goods.png
+│  ├─ taiwan-shipping-map.png
+│  ├─ barter-market.png
+│  ├─ settlement-story.png
+│  ├─ dutch-port.png
+│  ├─ spanish-fort.png
+│  └─ timeline.png
+└─ certificate/
+   └─ certificate.png
