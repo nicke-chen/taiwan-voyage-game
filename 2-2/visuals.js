@@ -97,8 +97,9 @@
     const style=document.createElement('style');
     style.textContent=`
       .heroArt{background:#eef9ff!important;border-radius:22px;overflow:hidden;min-height:270px;display:grid;place-items:center}
-      .heroArt img{width:100%;height:100%;object-fit:cover;display:block}
-      .visual img{width:100%;max-height:360px;object-fit:cover;display:block;border-radius:16px}
+      .heroArt img{width:100%;height:auto;max-height:430px;object-fit:contain;display:block;margin:auto}
+      .visual{padding:12px!important;min-height:0!important}
+      .visual img{width:min(100%,820px);height:auto;max-height:none;object-fit:contain;display:block;margin:auto;border-radius:16px}
       .testVisualNeutral{min-height:150px;border:2px dashed #b9d9e9;border-radius:16px;background:#f5fbff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#315b70;text-align:center}
       .testVisualNeutral .testVisualIcon{font-size:38px}
       .testVisualNeutral span{font-size:14px;font-weight:700;opacity:.8}
@@ -106,7 +107,14 @@
       .certificate>*{display:none}
       .certOverlay{display:block!important;position:absolute;left:23%;right:23%;top:39%;background:rgba(255,255,255,.88);border:2px solid #d6b260;border-radius:18px;padding:14px;text-align:center;box-shadow:0 8px 20px rgba(80,50,20,.08)}
       .certOverlay p{display:block!important;margin:7px 0;font-weight:800}
-      @media(max-width:700px){.heroArt{min-height:190px}.certificate{min-height:330px}.certOverlay{left:10%;right:10%;top:41%;font-size:14px}}
+      @media(max-width:700px){
+        .heroArt{min-height:0}
+        .heroArt img{width:100%;max-height:none}
+        .visual{padding:8px!important}
+        .visual img{width:100%;max-height:none}
+        .certificate{min-height:330px}
+        .certOverlay{left:10%;right:10%;top:41%;font-size:14px}
+      }
     `;
     document.head.appendChild(style);
     const art=document.querySelector('.heroArt');
