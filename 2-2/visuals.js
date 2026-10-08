@@ -59,28 +59,49 @@
   };
 
   const originalRenderVisual=(typeof renderVisual==='function')?renderVisual:null;
-  const testHideIds=new Set([8,17,18,28,29]);
-  const mapImages=new Set([
-    'images/north-taiwan-western-map.webp',
-    'images/zheng-development-map.webp',
-    'images/zheng-military-places-map.webp',
-    'images/han-migration-culture-map.webp'
-  ]);
+  // 測驗模式仍保留圖片，但對會直接透露答案的地圖／物件題，
+  // 改用「同主題但不直接給答案」的替代圖，避免出現空白。
+  const testVisualById={
+    2:'images/western-church.webp',
+    8:'images/hero.webp',
+    9:'images/western-place.webp',
+    10:'images/western-place.webp',
+    13:'images/han-culture.webp',
+    16:'images/zheng-trade.webp',
+    17:'images/hero.webp',
+    18:'images/hero.webp',
+    19:'images/zheng-education.webp',
+    20:'images/zheng-education.webp',
+    21:'images/zheng-military.webp',
+    22:'images/zheng-military.webp',
+    23:'images/zheng-military.webp',
+    24:'images/han-migration.webp',
+    25:'images/han-migration.webp',
+    26:'images/han-culture.webp',
+    27:'images/han-culture.webp',
+    28:'images/han-culture.webp',
+    29:'images/han-culture.webp',
+    30:'images/han-culture.webp',
+    32:'images/hero.webp',
+    37:'images/han-culture.webp',
+    39:'images/western-place.webp',
+    40:'images/zheng-education.webp',
+    42:'images/western-church.webp',
+    44:'images/han-culture.webp'
+  };
 
   renderVisual=function(q){
     const box=(typeof $==='function')?$('visual'):document.getElementById('visual');
     if(!box)return;
     box.innerHTML='';
 
-    // 評量模式：會直接透露答案的題目改用中性提示，不顯示線索圖。
-    const chosenImage=visualById[q.id]||HERO_IMAGE;
-    if(typeof selectedMode!=='undefined' && selectedMode==='test' && (testHideIds.has(q.id)||mapImages.has(chosenImage))){
-      box.innerHTML='<div class="testVisualNeutral"><div class="testVisualIcon">🧭</div><b>評量模式</b><span>請依題目內容作答</span></div>';
-      return;
+    let chosenImage=visualById[q.id]||HERO_IMAGE;
+    if(typeof selectedMode!=='undefined' && selectedMode==='test' && testVisualById[q.id]){
+      chosenImage=testVisualById[q.id];
     }
 
     const img=new Image();
-    img.src=chosenImage+'?v=20261008-map1';
+    img.src=chosenImage+'?v=20261008-imagefix1';
     img.alt=q?.t||q?.title||'題目插圖';
     img.onload=()=>{
       box.innerHTML='';
