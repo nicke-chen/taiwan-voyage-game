@@ -103,24 +103,50 @@
       .testVisualNeutral{min-height:150px;border:2px dashed #b9d9e9;border-radius:16px;background:#f5fbff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#315b70;text-align:center}
       .testVisualNeutral .testVisualIcon{font-size:38px}
       .testVisualNeutral span{font-size:14px;font-weight:700;opacity:.8}
-      .certificate{position:relative;min-height:430px;background:url('${CERT_BG}?v=20261008-map1') center/cover no-repeat!important;border:none!important;overflow:hidden;color:#17324a}
+      .certificate{position:relative;min-height:620px;background:url('${CERT_BG}?v=20261008-cert3') center/contain no-repeat!important;border:none!important;overflow:hidden;color:#17324a}
       .certificate>*{display:none}
-      .certOverlay{display:block!important;position:absolute;left:23%;right:23%;top:39%;background:rgba(255,255,255,.88);border:2px solid #d6b260;border-radius:18px;padding:14px;text-align:center;box-shadow:0 8px 20px rgba(80,50,20,.08)}
-      .certOverlay p{display:block!important;margin:7px 0;font-weight:800}
+      .certOverlay{display:flex!important;position:absolute;left:20%;right:20%;top:19%;bottom:15%;flex-direction:column;align-items:center;justify-content:center;gap:9px;background:rgba(255,255,255,.90);border:2px solid rgba(205,167,80,.9);border-radius:24px;padding:28px 34px;text-align:center;box-shadow:0 14px 32px rgba(72,48,20,.13);backdrop-filter:blur(1px)}
+      .certTitle{font-size:31px;line-height:1.15;font-weight:950;letter-spacing:.16em;color:#86571a}
+      .certSubtitle{font-size:15px;line-height:1.45;font-weight:850;color:#49667a;max-width:520px;margin-bottom:5px}
+      .certLead{font-size:14px;font-weight:800;color:#738697;margin-top:3px}
+      .certName{width:min(92%,520px);font-size:clamp(25px,3.3vw,36px);font-weight:950;color:#17324a;padding:6px 8px 9px;border-bottom:2px solid #d3b166;line-height:1.35}
+      .certDesc{font-size:16px;font-weight:850;color:#36576d;line-height:1.5}
+      .certScoreBox{display:flex!important;align-items:center;justify-content:center;gap:10px;margin-top:4px;padding:9px 18px;border-radius:999px;background:#f3f9fd;border:2px solid #bdd8e8}
+      .certScoreLabel{font-size:14px;font-weight:900;color:#648095}
+      .certScoreValue{font-size:23px;font-weight:950;color:#174e75}
+      .certFooter{font-size:13px;font-weight:800;color:#718493;margin-top:3px}
       @media(max-width:700px){
         .heroArt{min-height:0}
         .heroArt img{width:100%;max-height:none}
         .visual{padding:8px!important}
         .visual img{width:100%;max-height:none}
-        .certificate{min-height:330px}
-        .certOverlay{left:10%;right:10%;top:41%;font-size:14px}
+        .certificate{min-height:440px;background-size:contain!important}
+        .certOverlay{left:8%;right:8%;top:15%;bottom:10%;padding:18px 16px;gap:7px}
+        .certTitle{font-size:23px}
+        .certSubtitle{font-size:12px}
+        .certName{font-size:24px;width:95%}
+        .certDesc{font-size:14px}
+        .certScoreValue{font-size:19px}
+        .certFooter{font-size:12px}
       }
     `;
     document.head.appendChild(style);
     const art=document.querySelector('.heroArt');
     if(art)art.innerHTML=`<img src="${HERO_IMAGE}?v=20261008-map1" alt="大航海時代：臺灣任務 2-2">`;
     const cert=document.querySelector('.certificate');
-    if(cert)cert.innerHTML='<div class="certOverlay"><p id="certName"></p><p id="certMode"></p><p><b id="certScore"></b></p></div>';
+    if(cert)cert.innerHTML=`
+      <div class="certOverlay">
+        <div class="certTitle">學習成就獎狀</div>
+        <div class="certSubtitle">大航海時代在臺灣留下哪些影響？</div>
+        <div class="certLead">茲頒發給</div>
+        <div class="certName" id="certName"></div>
+        <div class="certDesc" id="certMode"></div>
+        <div class="certScoreBox">
+          <span class="certScoreLabel">成績</span>
+          <span class="certScoreValue" id="certScore"></span>
+        </div>
+        <div class="certFooter" id="certDate"></div>
+      </div>`;
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',applyChrome);
