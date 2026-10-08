@@ -1,12 +1,50 @@
 const $=id=>document.getElementById(id);let selectedMode='learn',queue=[],pos=0,baseCount=0,score=0,first=0,wrongIds=new Set(),retryIds=[],testAnswers={},tapPayload=null;const modeNames={learn:'學習模式',practice:'練習模式',test:'測驗模式',full:'48題全題庫'};
-function shuffled(a){return[...a].sort(()=>Math.random()-.5)}
-function buildQueue(){if(selectedMode==='full')return bank.map(q=>({...q}));if(selectedMode==='learn'){let b=shuffled(bank.filter(x=>x.l==='基礎')).slice(0,14),a=shuffled(bank.filter(x=>x.l==='進階')).slice(0,7),boss=shuffled(bank.filter(x=>x.l==='Boss')).slice(0,3);return shuffled([...b,...a,...boss]).map(q=>({...q}))}return shuffled(bank).slice(0,24).map(q=>({...q}))}
+function shuffled(a){
+  const out=[...a];
+  for(let i=out.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [out[i],out[j]]=[out[j],out[i]];
+  }
+  return out;
+}
+function randomizeQuestion(src){
+  const q={...src};
+  if((q.type==='single'||q.type==='multi')&&Array.isArray(src.o)){
+    const entries=shuffled(src.o.map((opt,oldIndex)=>({opt,oldIndex})));
+    q.o=entries.map(x=>x.opt);
+    if(q.type==='single'){
+      q.a=entries.findIndex(x=>x.oldIndex===src.a);
+    }else{
+      const correct=new Set(src.a);
+      q.a=entries.map((x,newIndex)=>correct.has(x.oldIndex)?newIndex:null).filter(x=>x!==null);
+    }
+  }
+  if(q.type==='match'&&Array.isArray(src.pairs)){
+    q.pairs=shuffled(src.pairs.map(p=>[...p]));
+    q.opts=[...(src.opts||[])];
+  }
+  if(q.type==='sequence'&&Array.isArray(src.items)){
+    q.items=src.items.map(x=>[...x]);
+    q.order=[...src.order];
+  }
+  return q;
+}
+function buildQueue(){
+  if(selectedMode==='full')return shuffled(bank).map(randomizeQuestion);
+  if(selectedMode==='learn'){
+    const b=shuffled(bank.filter(x=>x.l==='基礎')).slice(0,14);
+    const a=shuffled(bank.filter(x=>x.l==='進階')).slice(0,7);
+    const boss=shuffled(bank.filter(x=>x.l==='Boss')).slice(0,3);
+    return shuffled([...b,...a,...boss]).map(randomizeQuestion);
+  }
+  return shuffled(bank).slice(0,24).map(randomizeQuestion);
+}
 function shownType(q){if(q.type==='match')return'拖曳配對題';if(q.type==='sequence')return'拖曳排序題';if(q.type==='multi')return'複選題';return'單選題'}
 function sceneFor(q){if(q.c.startsWith('A'))return['⛪ 🐂 🔤','西方文化與足跡','宗教、語言、動植物與地名'];if(q.c.startsWith('B'))return['🌾 ⛵ 🏫','鄭氏政權的改變','農業、海上貿易、教育與軍隊地名'];if(q.c.startsWith('C'))return['👨‍👩‍👧‍👦 🏮 🛕','漢人習俗與信仰','人口移入、習俗、信仰與漢人社會發展'];return['🧭 🗺️ ⚓','大航海時代影響總整合','把人物、制度、文化與地名串起來']}
 document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('active'));b.classList.add('active');selectedMode=b.dataset.mode});
 $('startBtn').onclick=()=>{queue=buildQueue();baseCount=queue.length;pos=score=first=0;wrongIds=new Set();retryIds=[];testAnswers={};$('modePanel').classList.add('hidden');$('game').classList.remove('hidden');$('result').classList.remove('show');render()};
 function renderVisual(q){let [em,title,desc]=sceneFor(q);$('visual').innerHTML=`<div><div class="sceneEmoji">${em}</div><h3>${title}</h3><p>${desc}</p></div>`}
-function render(){if(pos>=queue.length){if(selectedMode!=='test'&&retryIds.length){let ids=[...new Set(retryIds)];retryIds=[];let retry=ids.map(id=>({...bank.find(x=>x.id===id),_retry:true}));if(retry.length){queue.push(...retry);render();return}}finish();return}let q=queue[pos];$('chapter').textContent=q.c;$('qtitle').textContent=`第 ${pos+1} 題｜${q.t}${q._retry?'（錯題再練）':''}`;$('qtext').textContent=q.q;$('levelPill').textContent=q._retry?'錯題複習':q.l;$('levelPill').className='pill '+(q.l==='進階'?'advanced':q.l==='Boss'?'boss':'');$('typePill').textContent=shownType(q);$('stageStat').textContent=`${pos+1}/${queue.length}`;$('scoreStat').textContent=score;$('firstStat').textContent=first;$('bar').style.width=`${Math.min(100,pos/queue.length*100)}%`;$('feedback').textContent='';$('hintbox').textContent=q.h;$('hintbox').classList.remove('show');$('hintBtn').disabled=false;$('hintBtn').classList.toggle('hidden',selectedMode==='test');$('nextBtn').classList.add('hidden');$('nextBtn').textContent=pos===queue.length-1?'查看結果 →':'下一題 →';renderVisual(q);renderAnswer(q)}
+function render(){if(pos>=queue.length){if(selectedMode!=='test'&&retryIds.length){let ids=[...new Set(retryIds)];retryIds=[];let retry=ids.map(id=>({...randomizeQuestion(bank.find(x=>x.id===id)),_retry:true}));if(retry.length){queue.push(...retry);render();return}}finish();return}let q=queue[pos];$('chapter').textContent=q.c;$('qtitle').textContent=`第 ${pos+1} 題｜${q.t}${q._retry?'（錯題再練）':''}`;$('qtext').textContent=q.q;$('levelPill').textContent=q._retry?'錯題複習':q.l;$('levelPill').className='pill '+(q.l==='進階'?'advanced':q.l==='Boss'?'boss':'');$('typePill').textContent=shownType(q);$('stageStat').textContent=`${pos+1}/${queue.length}`;$('scoreStat').textContent=score;$('firstStat').textContent=first;$('bar').style.width=`${Math.min(100,pos/queue.length*100)}%`;$('feedback').textContent='';$('hintbox').textContent=q.h;$('hintbox').classList.remove('show');$('hintBtn').disabled=false;$('hintBtn').classList.toggle('hidden',selectedMode==='test');$('nextBtn').classList.add('hidden');$('nextBtn').textContent=pos===queue.length-1?'查看結果 →':'下一題 →';renderVisual(q);renderAnswer(q)}
 function renderAnswer(q){let a=$('answerArea');a.innerHTML='';({single:renderSingle,multi:renderMulti,match:renderDragMatch,sequence:renderDragSequence}[q.type]||renderSingle)(q,a)}
 function markResult(q,correct,tries=1){if(selectedMode==='test'){$('nextBtn').classList.remove('hidden');return}if(correct){if(q._retry){$('feedback').textContent=`✅ 已重新答對：${q.ok}`;}else{let pts=tries===1?5:3;score+=pts;if(tries===1)first++;$('feedback').textContent=`✅ ${q.ok}（+${pts}分）`}$('nextBtn').classList.remove('hidden');$('hintBtn').disabled=true}else{wrongIds.add(q.id);if(!q._retry)retryIds.push(q.id);$('feedback').textContent='❌ 再想一下；可以使用提示後再試。'}$('scoreStat').textContent=score;$('firstStat').textContent=first}
 function renderSingle(q,a){let box=document.createElement('div');box.className='choices';let tries=0;q.o.forEach((opt,idx)=>{let b=document.createElement('button');b.className='choice';b.innerHTML=`<span class="letter">${String.fromCharCode(65+idx)}</span>${opt}`;b.onclick=()=>{tries++;if(selectedMode==='test'){testAnswers[q.id]=idx;box.querySelectorAll('button').forEach(x=>x.disabled=true);markResult(q,true);return}if(idx===q.a){b.classList.add('correct');box.querySelectorAll('button').forEach(x=>x.disabled=true);markResult(q,true,tries)}else{b.classList.add('wrong');markResult(q,false,tries);setTimeout(()=>b.classList.remove('wrong'),600)}};box.appendChild(b)});a.appendChild(box)}
