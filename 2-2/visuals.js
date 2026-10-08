@@ -59,12 +59,21 @@
   };
 
   const originalRenderVisual=(typeof renderVisual==='function')?renderVisual:null;
+  const testHideIds=new Set([8,17,18,28,29]);
+
   renderVisual=function(q){
     const box=(typeof $==='function')?$('visual'):document.getElementById('visual');
     if(!box)return;
     box.innerHTML='';
+
+    // 評量模式：會直接透露答案的題目改用中性提示，不顯示線索圖。
+    if(typeof selectedMode!=='undefined' && selectedMode==='test' && testHideIds.has(q.id)){
+      box.innerHTML='<div class="testVisualNeutral"><div class="testVisualIcon">🧭</div><b>評量模式</b><span>請依題目內容作答</span></div>';
+      return;
+    }
+
     const img=new Image();
-    img.src=(visualById[q.id]||HERO_IMAGE)+'?v=20261007';
+    img.src=(visualById[q.id]||HERO_IMAGE)+'??v=20261008-2';
     img.alt=q?.t||q?.title||'題目插圖';
     img.onload=()=>{
       box.innerHTML='';
@@ -83,7 +92,10 @@
       .heroArt{background:#eef9ff!important;border-radius:22px;overflow:hidden;min-height:270px;display:grid;place-items:center}
       .heroArt img{width:100%;height:100%;object-fit:cover;display:block}
       .visual img{width:100%;max-height:360px;object-fit:cover;display:block;border-radius:16px}
-      .certificate{position:relative;min-height:430px;background:url('${CERT_BG}?v=20261007') center/cover no-repeat!important;border:none!important;overflow:hidden;color:#17324a}
+      .testVisualNeutral{min-height:150px;border:2px dashed #b9d9e9;border-radius:16px;background:#f5fbff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#315b70;text-align:center}
+      .testVisualNeutral .testVisualIcon{font-size:38px}
+      .testVisualNeutral span{font-size:14px;font-weight:700;opacity:.8}
+      .certificate{position:relative;min-height:430px;background:url('${CERT_BG}??v=20261008-2') center/cover no-repeat!important;border:none!important;overflow:hidden;color:#17324a}
       .certificate>*{display:none}
       .certOverlay{display:block!important;position:absolute;left:23%;right:23%;top:39%;background:rgba(255,255,255,.88);border:2px solid #d6b260;border-radius:18px;padding:14px;text-align:center;box-shadow:0 8px 20px rgba(80,50,20,.08)}
       .certOverlay p{display:block!important;margin:7px 0;font-weight:800}
@@ -91,7 +103,7 @@
     `;
     document.head.appendChild(style);
     const art=document.querySelector('.heroArt');
-    if(art)art.innerHTML=`<img src="${HERO_IMAGE}?v=20261007" alt="大航海時代：臺灣任務 2-2">`;
+    if(art)art.innerHTML=`<img src="${HERO_IMAGE}??v=20261008-2" alt="大航海時代：臺灣任務 2-2">`;
     const cert=document.querySelector('.certificate');
     if(cert)cert.innerHTML='<div class="certOverlay"><p id="certName"></p><p id="certMode"></p><p><b id="certScore"></b></p></div>';
   }
