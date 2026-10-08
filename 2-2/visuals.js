@@ -4,7 +4,7 @@
 
   // 48 題逐題指定圖片；不再使用關鍵字猜測。
   const visualById={
-    1:'images/hero.webp',
+    1:'images/north-taiwan-western-map.webp',
     2:'images/north-taiwan-western-map.webp',
     3:'images/western-church.webp',
     4:'images/western-school.webp',
@@ -14,24 +14,24 @@
     8:'images/western-crops.webp',
     9:'images/north-taiwan-western-map.webp',
     10:'images/north-taiwan-western-map.webp',
-    11:'images/hero.webp',
+    11:'images/western-church.webp',
     12:'images/hero.webp',
 
     13:'images/han-migration-culture-map.webp',
     14:'images/zheng-farm.webp',
     15:'images/zheng-farm.webp',
-    16:'images/zheng-development-map.webp',
+    16:'images/zheng-trade.webp',
     17:'images/zheng-trade.webp',
     18:'images/zheng-trade.webp',
     19:'images/zheng-development-map.webp',
-    20:'images/zheng-development-map.webp',
+    20:'images/zheng-education.webp',
     21:'images/zheng-military-places-map.webp',
     22:'images/zheng-military-places-map.webp',
     23:'images/zheng-military-places-map.webp',
 
     24:'images/han-migration-culture-map.webp',
-    25:'images/han-migration-culture-map.webp',
-    26:'images/han-migration-culture-map.webp',
+    25:'images/han-migration.webp',
+    26:'images/han-culture.webp',
     27:'images/han-migration-culture-map.webp',
     28:'images/han-faith.webp',
     29:'images/han-faith.webp',
@@ -39,23 +39,23 @@
 
     31:'images/hero.webp',
     32:'images/zheng-development-map.webp',
-    33:'images/hero.webp',
+    33:'images/four-groups-impact.webp',
     34:'images/zheng-trade.webp',
-    35:'images/hero.webp',
+    35:'images/place-name-comparison-map.webp',
     36:'images/hero.webp',
     37:'images/han-migration-culture-map.webp',
     38:'images/zheng-farm.webp',
     39:'images/north-taiwan-western-map.webp',
-    40:'images/zheng-development-map.webp',
+    40:'images/zheng-education.webp',
 
     41:'images/western-language.webp',
     42:'images/north-taiwan-western-map.webp',
-    43:'images/hero.webp',
+    43:'images/zheng-development-map.webp',
     44:'images/han-migration-culture-map.webp',
-    45:'images/hero.webp',
-    46:'images/hero.webp',
-    47:'images/hero.webp',
-    48:'images/hero.webp'
+    45:'images/four-groups-impact.webp',
+    46:'images/impact-timeline.webp',
+    47:'images/four-groups-impact.webp',
+    48:'images/impact-summary-map.webp'
   };
 
   const originalRenderVisual=(typeof renderVisual==='function')?renderVisual:null;
@@ -87,7 +87,11 @@
     39:'images/western-place.webp',
     40:'images/zheng-education.webp',
     42:'images/western-church.webp',
-    44:'images/han-culture.webp'
+    44:'images/han-culture.webp',
+    45:'images/hero.webp',
+    46:'images/hero.webp',
+    47:'images/hero.webp',
+    48:'images/hero.webp'
   };
 
   renderVisual=function(q){
@@ -101,7 +105,7 @@
     }
 
     const img=new Image();
-    img.src=chosenImage+'?v=20261008-imagefix1';
+    img.src=chosenImage+'?v=20261008-finalmap2';
     img.alt=q?.t||q?.title||'題目插圖';
     img.onload=()=>{
       box.innerHTML='';
