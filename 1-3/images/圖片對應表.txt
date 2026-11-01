@@ -1,0 +1,21 @@
+1-3 圖片對應表（題號 → 檔名）
+
+1-2 → 01-tribes-overview.png
+3-5 → 02-shao-white-deer.png
+6-9 → 03-tao-flying-fish-myth.png
+10-12、14 → 04-flying-fish-ecology.png
+13 → 02-shao-white-deer.png
+15 → 03-tao-flying-fish-myth.png
+16、48 → hero-1-3-banner.png
+
+17-20、24-25、28、30-31 → 05-tribal-meeting.png
+21-23、26-27、29、32 → 06-forest-hunting-wisdom.png
+
+33-37、41、43、46 → 07-atayal-natural-living.png
+38、44 → 08-communal-food-sharing.png
+39-40、42、45、47 → 09-communal-labor-house.png
+
+首頁主視覺：hero-1-3-main.png
+小橫幅：hero-1-3-banner.png
+
+上傳位置：GitHub repository /1-3/images/
