@@ -1,0 +1,1 @@
+(function(){const fallbackEmoji=q=>q.c.startsWith('A')?'🌿 🦌 🐟':q.c.startsWith('B')?'🏘️ 🌲 🤝':'🎋 🏠 🍲';renderVisual=function(q){const box=document.getElementById('visual');if(!box)return;box.innerHTML='<div class="fallback"><span class="emoji">'+fallbackEmoji(q)+'</span>原住民族文化與環境情境圖<br><span class="small">下一階段將換成不洩題的手繪圖</span></div>';};})();
